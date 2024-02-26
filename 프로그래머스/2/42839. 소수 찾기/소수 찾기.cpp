@@ -2,15 +2,16 @@
 #include <vector>
 #include <algorithm>
 #include <set>
-#define MAX 10000001
+#define MAX 9999999
 using namespace std;
-bool judge[MAX];
+bool prime[MAX];
+
 void isPrime(){
-    for(int i = 2; i <= MAX; i++) judge[i] = true;
+    for(int i = 2; i <= MAX; i++) prime[i] = true;
     for(int i = 2; i*i <= MAX; i++){
-        if(!judge[i]) continue;
+        if(!prime[i]) continue;
         for(int j = i*i; j <= MAX; j+=i){
-            judge[j] = false;
+            prime[j] = false;
         }
     }
 }
@@ -18,14 +19,15 @@ void isPrime(){
 int solution(string numbers) {
     int answer = 0;
     isPrime();
-    set<int> ans{};
+    set<int> s;
     sort(numbers.begin(), numbers.end());
     do{
-        string tmp;
+        string ans;
         for(int i = 0; i < numbers.size(); i++){
-            tmp += numbers[i];
-            if(judge[stoi(tmp)]) ans.insert(stoi(tmp));
+            ans += numbers[i];
+            if(prime[stoi(ans)]) s.insert(stoi(ans));
         }
     }while(next_permutation(numbers.begin(), numbers.end()));
-    return ans.size();
+
+    return s.size();
 }
