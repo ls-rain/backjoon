@@ -2,21 +2,21 @@
 #include <vector>
 
 using namespace std;
-int visited[8];
-int answer = 0;
+int answer = -1;
+bool visited[9];
 
-void dfs(int k, vector<vector<int>> dungeons, int cnt){
+void dfs(int cnt, int k, vector<vector<int>> dungeons){
     if(answer < cnt) answer = cnt;
     for(int i = 0; i < dungeons.size(); i++){
-        if(dungeons[i][0] <= k && !visited[i]){
-            visited[i] = 1;          
-            dfs(k- dungeons[i][1], dungeons, cnt+1);
+        if(k >= dungeons[i][0] && !visited[i]){
+            visited[i] = 1;
+            dfs(cnt + 1, k - dungeons[i][1], dungeons);
             visited[i] = 0;
         }
     }
 }
 
 int solution(int k, vector<vector<int>> dungeons) {
-    dfs(k, dungeons, 0);
+    dfs(0, k, dungeons);
     return answer;
 }
