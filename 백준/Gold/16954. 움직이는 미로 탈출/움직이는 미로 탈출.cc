@@ -27,9 +27,19 @@ int bfs() {
             }
         }
         // 벽 이동
-        for (int i = 7; i >= 1; i--)
-            for (int j = 0; j < 8; j++) map[i][j] = map[i - 1][j];
-        for (int i = 0; i < 8; i++) map[0][i] = '.';
+        // for (int i = 7; i >= 1; i--)
+        //     for (int j = 0; j < 8; j++) map[i][j] = map[i - 1][j];
+        // for (int i = 0; i < 8; i++) map[0][i] = '.';
+        bool tag[9][9] = {false,};
+        for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 8; j++)
+                if (map[i][j] == '#') tag[i + 1][j] = true;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (tag[i][j] == true) map[i][j] = '#';
+                else map[i][j] = '.';
+            }
+        }
     }
     return 0;
 }
