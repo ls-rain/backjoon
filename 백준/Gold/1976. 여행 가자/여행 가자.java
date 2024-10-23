@@ -41,7 +41,7 @@ public class Main {
             }
         }
         for (int i = 0; i < m; i++) {
-            if (getParent(arr.get(i)) != parent[arr.get(0)]) {
+            if (getParent(arr.get(i)) != getParent(arr.get(0))) {
                 System.out.println("NO");
                 return;
             }
